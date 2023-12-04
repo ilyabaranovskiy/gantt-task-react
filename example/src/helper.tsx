@@ -1,4 +1,4 @@
-import { Task } from "../../dist/types/public-types";
+import { Task } from "../../dist";
 
 export function initTasks() {
   const currentDate = new Date();
@@ -43,7 +43,7 @@ export function initTasks() {
     {
       start: new Date(currentDate.getFullYear(), currentDate.getMonth(), 4),
       end: new Date(currentDate.getFullYear(), currentDate.getMonth(), 8, 0, 0),
-      name: "Discussion with team",
+      name: "Discussion with team ataerughaer iughiuae rghaeriugaieurgiuha",
       id: "Task 2",
       progress: 10,
       dependencies: ["Task 1"],

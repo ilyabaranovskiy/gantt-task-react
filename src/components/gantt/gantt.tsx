@@ -65,6 +65,7 @@ export const Gantt: React.FunctionComponent<GanttProps> = ({
   onDelete,
   onSelect,
   onExpanderClick,
+  onTaskNameClick,
 }) => {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const taskListRef = useRef<HTMLDivElement>(null);
@@ -328,31 +329,31 @@ export const Gantt: React.FunctionComponent<GanttProps> = ({
    */
   const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
     event.preventDefault();
-    let ajustment = 0;
+    let adjustment = 0;
     let isX = true;
     switch (event.key) {
       case "Down": // IE/Edge specific value
       case "ArrowDown":
-        ajustment += rowHeight;
+        adjustment += rowHeight;
         isX = false;
         break;
       case "Up": // IE/Edge specific value
       case "ArrowUp":
-        ajustment -= rowHeight;
+        adjustment -= rowHeight;
         isX = false;
         break;
       case "Left":
       case "ArrowLeft":
-        ajustment -= columnWidth;
+        adjustment -= columnWidth;
         break;
       case "Right": // IE/Edge specific value
       case "ArrowRight":
-        ajustment += columnWidth;
+        adjustment += columnWidth;
         break;
     }
     if (isX) {
       setScrollX((prevScrollX: number) => {
-        let newScrollX = prevScrollX + ajustment;
+        let newScrollX = prevScrollX + adjustment;
         if (newScrollX < 0) {
           newScrollX = 0;
         } else if (newScrollX > svgWidth) {
@@ -362,7 +363,7 @@ export const Gantt: React.FunctionComponent<GanttProps> = ({
       });
     } else {
       setScrollY((prevScrollY: number) => {
-        let newScrollY = prevScrollY + ajustment;
+        let newScrollY = prevScrollY + adjustment;
         if (newScrollY < 0) {
           newScrollY = 0;
         } else if (newScrollY > ganttFullHeight - ganttHeight) {
@@ -395,6 +396,11 @@ export const Gantt: React.FunctionComponent<GanttProps> = ({
   const handleExpanderClick = (task: Task) => {
     if (onExpanderClick && task.hideChildren !== undefined) {
       onExpanderClick({ ...task, hideChildren: !task.hideChildren });
+    }
+  };
+  const handleTaskNameClick = (task: Task) => {
+    if (onTaskNameClick) {
+      onTaskNameClick(task);
     }
   };
   const gridProps: GridProps = {
@@ -456,6 +462,7 @@ export const Gantt: React.FunctionComponent<GanttProps> = ({
     taskListRef,
     setSelectedTask: handleSelectedTask,
     onExpanderClick: handleExpanderClick,
+    onTaskNameClick: handleTaskNameClick,
     TaskListHeader,
     TaskListTable,
   };

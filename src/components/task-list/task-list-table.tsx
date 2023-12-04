@@ -17,7 +17,7 @@ const toLocaleDateStringFactory =
 const dateTimeOptions: Intl.DateTimeFormatOptions = {
   weekday: "short",
   year: "numeric",
-  month: "long",
+  month: "short",
   day: "numeric",
 };
 
@@ -31,6 +31,7 @@ export const TaskListTableDefault: React.FC<{
   selectedTaskId: string;
   setSelectedTask: (taskId: string) => void;
   onExpanderClick: (task: Task) => void;
+  onTaskNameClick: (task: Task) => void;
 }> = ({
   rowHeight,
   rowWidth,
@@ -39,6 +40,7 @@ export const TaskListTableDefault: React.FC<{
   fontSize,
   locale,
   onExpanderClick,
+  onTaskNameClick,
 }) => {
   const toLocaleDateString = useMemo(
     () => toLocaleDateStringFactory(locale),
@@ -86,7 +88,12 @@ export const TaskListTableDefault: React.FC<{
                 >
                   {expanderSymbol}
                 </div>
-                <div>{t.name}</div>
+                <div
+                  className={styles.taskListNameSpan}
+                  onClick={() => {onTaskNameClick(t)}}
+                >
+                  {t.name}
+                </div>
               </div>
             </div>
             <div

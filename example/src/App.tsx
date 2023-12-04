@@ -58,6 +58,10 @@ const App = () => {
     console.log("On Click event Id:" + task.id);
   };
 
+  const handleTaskNameClick = (task: Task) => {
+    console.log("On task name event Id:" + task.id);
+  };
+
   const handleSelect = (task: Task, isSelected: boolean) => {
     console.log(task.name + " has " + (isSelected ? "selected" : "unselected"));
   };
@@ -85,6 +89,7 @@ const App = () => {
         onClick={handleClick}
         onSelect={handleSelect}
         onExpanderClick={handleExpanderClick}
+        onTaskNameClick={handleTaskNameClick}
         listCellWidth={isChecked ? "155px" : ""}
         columnWidth={columnWidth}
       />
@@ -99,6 +104,7 @@ const App = () => {
         onClick={handleClick}
         onSelect={handleSelect}
         onExpanderClick={handleExpanderClick}
+        onTaskNameClick={handleTaskNameClick}
         listCellWidth={isChecked ? "155px" : ""}
         ganttHeight={300}
         columnWidth={columnWidth}
