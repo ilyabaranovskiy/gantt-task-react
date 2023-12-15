@@ -76,6 +76,7 @@ export interface EventOption {
    * Invokes on click on task list
    */
   onTaskNameClick?: (task: Task) => void;
+  onTaskListSort?: (tasks: any[]) => void;
 }
 
 export interface DisplayOption {

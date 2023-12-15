@@ -32,6 +32,7 @@ export const TaskListTableDefault: React.FC<{
   setSelectedTask: (taskId: string) => void;
   onExpanderClick: (task: Task) => void;
   onTaskNameClick: (task: Task) => void;
+  onTaskListSort: (tasks: any[]) => void;
 }> = ({
   rowHeight,
   rowWidth,
@@ -41,6 +42,7 @@ export const TaskListTableDefault: React.FC<{
   locale,
   onExpanderClick,
   onTaskNameClick,
+  onTaskListSort
 }) => {
   const toLocaleDateString = useMemo(
     () => toLocaleDateStringFactory(locale),
@@ -76,6 +78,7 @@ export const TaskListTableDefault: React.FC<{
                 maxWidth: rowWidth,
               }}
               title={t.name}
+              onClick={() => onTaskListSort([])}
             >
               <div className={styles.taskListNameWrapper}>
                 <div

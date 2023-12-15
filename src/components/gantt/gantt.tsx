@@ -66,6 +66,7 @@ export const Gantt: React.FunctionComponent<GanttProps> = ({
   onSelect,
   onExpanderClick,
   onTaskNameClick,
+  onTaskListSort,
 }) => {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const taskListRef = useRef<HTMLDivElement>(null);
@@ -403,6 +404,11 @@ export const Gantt: React.FunctionComponent<GanttProps> = ({
       onTaskNameClick(task);
     }
   };
+  const handleTaskListSort = (tasks: any[]) => {
+    if (onTaskListSort) {
+      onTaskListSort(tasks);
+    }
+  };
   const gridProps: GridProps = {
     columnWidth,
     svgWidth,
@@ -463,6 +469,7 @@ export const Gantt: React.FunctionComponent<GanttProps> = ({
     setSelectedTask: handleSelectedTask,
     onExpanderClick: handleExpanderClick,
     onTaskNameClick: handleTaskNameClick,
+    onTaskListSort: handleTaskListSort,
     TaskListHeader,
     TaskListTable,
   };
